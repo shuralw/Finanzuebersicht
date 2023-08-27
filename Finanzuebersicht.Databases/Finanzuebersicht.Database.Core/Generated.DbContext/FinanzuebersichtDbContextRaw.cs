@@ -3,10 +3,8 @@ using Finanzuebersicht.Database.Core.Generated.DbContext.Modules.Nutzerfinanzen.
 using Finanzuebersicht.Database.Core.Generated.DbContext.Modules.Nutzerfinanzen.CategorySearchTerms;
 using Finanzuebersicht.Database.Core.Generated.DbContext.Modules.Nutzerfinanzen.StartSalden;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Finanzuebersicht.Database.Core.Generated.DbContext;
 
 namespace Finanzuebersicht.Database.Core.Generated.DbContext
 {
