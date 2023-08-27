@@ -19,7 +19,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Account
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Get Accounting Entries with Pagination", Tags = new[] { "Nutzerfinanzen" })]
         [Pagination(FilterFields = new[] { "CategoryId", "Id" }, SortFields = new[] { "Id" })]
         public ActionResult<IDbPagedResult<AccountingEntryDtoExpanded>> GetPagedAccountingEntries()
@@ -28,7 +28,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Account
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{accountingEntryId}")]
         [SwaggerOperation(Summary = "Get Accounting Entry by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<AccountingEntryDtoExpanded> GetAccountingEntryDetail(Guid accountingEntryId)
@@ -37,7 +37,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Account
         }
 
         [HttpPost]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Create Accounting Entry", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<DataBody<Guid>> CreateAccountingEntry([FromBody] AccountingEntryDtoData accountingEntry)
         {
@@ -45,7 +45,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Account
         }
 
         [HttpPut]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Update Accounting Entry", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult UpdateAccountingEntry([FromBody] AccountingEntryDtoDefaultUpdate accountingEntry)
         {
@@ -54,7 +54,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Account
         }
 
         [HttpDelete]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{accountingEntryId}")]
         [SwaggerOperation(Summary = "Delete Accounting Entry by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult DeleteAccountingEntry(Guid accountingEntryId)

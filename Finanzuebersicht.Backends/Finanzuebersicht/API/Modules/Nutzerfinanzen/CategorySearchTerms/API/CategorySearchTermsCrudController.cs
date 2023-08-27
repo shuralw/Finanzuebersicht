@@ -19,7 +19,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Get Category Search Terms with Pagination", Tags = new[] { "Nutzerfinanzen" })]
         [Pagination(FilterFields = new[] { "CategoryId", "Id" }, SortFields = new[] { "Id" })]
         public ActionResult<IDbPagedResult<CategorySearchTermDtoExpanded>> GetPagedCategorySearchTerms()
@@ -28,7 +28,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{categorySearchTermId}")]
         [SwaggerOperation(Summary = "Get Category Search Term by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<CategorySearchTermDtoExpanded> GetCategorySearchTermDetail(Guid categorySearchTermId)
@@ -37,7 +37,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpPost]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Create Category Search Term", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<DataBody<Guid>> CreateCategorySearchTerm([FromBody] CategorySearchTermDtoData categorySearchTerm)
         {
@@ -45,7 +45,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpPut]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Update Category Search Term", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult UpdateCategorySearchTerm([FromBody] CategorySearchTermDtoDefaultUpdate categorySearchTerm)
         {
@@ -54,7 +54,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpDelete]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{categorySearchTermId}")]
         [SwaggerOperation(Summary = "Delete Category Search Term by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult DeleteCategorySearchTerm(Guid categorySearchTermId)

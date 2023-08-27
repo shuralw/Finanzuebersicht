@@ -20,7 +20,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.StartSa
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Get Start Salden with Pagination", Tags = new[] { "Nutzerfinanzen" })]
         [Pagination(FilterFields = new[] { "Id" }, SortFields = new[] { "Id" })]
         public ActionResult<IDbPagedResult<StartSaldoDtoExpanded>> GetPagedStartSalden()
@@ -29,7 +29,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.StartSa
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{startSaldoId}")]
         [SwaggerOperation(Summary = "Get Start Saldo by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<StartSaldoDtoExpanded> GetStartSaldoDetail(Guid startSaldoId)
@@ -38,7 +38,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.StartSa
         }
 
         [HttpPost]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Create Start Saldo", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<DataBody<Guid>> CreateStartSaldo([FromBody] StartSaldoDtoData startSaldo)
         {
@@ -46,7 +46,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.StartSa
         }
 
         [HttpPut]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Update Start Saldo", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult UpdateStartSaldo([FromBody] StartSaldoDtoDefaultUpdate startSaldo)
         {
@@ -55,7 +55,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.StartSa
         }
 
         [HttpDelete]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{startSaldoId}")]
         [SwaggerOperation(Summary = "Delete Start Saldo by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult DeleteStartSaldo(Guid startSaldoId)

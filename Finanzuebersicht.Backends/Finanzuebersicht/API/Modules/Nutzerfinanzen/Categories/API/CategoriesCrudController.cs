@@ -20,7 +20,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Get Categories with Pagination", Tags = new[] { "Nutzerfinanzen" })]
         [Pagination(FilterFields = new[] { "CategoryId", "Id" }, SortFields = new[] { "Id" })]
         public ActionResult<IDbPagedResult<CategoryDtoExpanded>> GetPagedCategories()
@@ -29,7 +29,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpGet]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{categoryId}")]
         [SwaggerOperation(Summary = "Get Category by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<CategoryDtoExpanded> GetCategoryDetail(Guid categoryId)
@@ -38,7 +38,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpPost]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Create Category", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult<DataBody<Guid>> CreateCategory([FromBody] CategoryDtoData category)
         {
@@ -46,7 +46,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpPut]
-        [AuthorizeAttribute]
+        [Authorize]
         [SwaggerOperation(Summary = "Update Category", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult UpdateCategory([FromBody] CategoryDtoDefaultUpdate category)
         {
@@ -55,7 +55,7 @@ namespace Finanzuebersicht.Backend.CodeGeneration.Modules.Nutzerfinanzen.Categor
         }
 
         [HttpDelete]
-        [AuthorizeAttribute]
+        [Authorize]
         [Route("{categoryId}")]
         [SwaggerOperation(Summary = "Delete Category by Id", Tags = new[] { "Nutzerfinanzen" })]
         public ActionResult DeleteCategory(Guid categoryId)
