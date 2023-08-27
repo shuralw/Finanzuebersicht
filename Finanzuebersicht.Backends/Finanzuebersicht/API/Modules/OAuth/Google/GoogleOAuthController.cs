@@ -1,41 +1,35 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Finanzuebersicht.API.Modules.OAuth.Google
 {
     [Route("account")]
-    public class AccountController : Controller
+
+    public class AuthController : Controller
     {
-        [HttpGet("login-with-google")]
-        public IActionResult LoginWithGoogle()
+        [HttpGet("signin-google")]
+        public IActionResult SignInGoogle()
         {
-            // You can add your post-authentication redirect URL here
-            string redirectUrl = Url.Action("GoogleResponse", "Account");
-
-            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
-
-            return Challenge(properties, "Google");
+            var authProperties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("GoogleResponse")
+            };
+            return Challenge(authProperties, GoogleDefaults.AuthenticationScheme);
         }
 
         [HttpGet("google-response")]
         public async Task<IActionResult> GoogleResponse()
         {
-            // Extract the user's info from the authentication response
-            var result = await HttpContext.AuthenticateAsync("Cookies");
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             if (result?.Succeeded != true)
             {
-                return BadRequest("Authentication failed");
+                return BadRequest();
             }
 
-            var claimsIdentity = (ClaimsIdentity)result.Principal.Identity;
-            var emailClaim = claimsIdentity.FindFirst(ClaimTypes.Email);
-
-            // Perform your business logic here, for example, log the email or save to DB
-            // string email = emailClaim.Value;
-
-            return Ok("Successfully authenticated");
+            return Ok();
         }
     }
 }

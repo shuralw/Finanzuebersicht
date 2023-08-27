@@ -33,21 +33,7 @@ namespace Finanzuebersicht
             {
                 options.ClientId = configuration["Authentication:Google:ClientId"];
                 options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-                options.CallbackPath = new PathString("/signin-google");
-
-                options.Events = new OAuthEvents
-                {
-                    OnRedirectToAuthorizationEndpoint = context =>
-                    {
-                        Console.WriteLine($"Redirecting to Authorization Endpoint: {context.RedirectUri}");
-                        return Task.CompletedTask;
-                    },
-                    OnCreatingTicket = context =>
-                    {
-                        Console.WriteLine("Creating OAuth ticket");
-                        return Task.CompletedTask;
-                    }
-                };
+                options.CallbackPath = new PathString("/account/google-response");  // This should match your Redirect URI path
             });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
