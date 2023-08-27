@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "3359fb59-b2a6-46d1-880d-651886e30886",
+		"name": "API End-to-End Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "default"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "mandantId",
+			"value": ""
+		},
+		{
+			"key": "emailUserId",
+			"value": ""
+		},
+		{
+			"key": "emailUserPermissionId",
+			"value": ""
+		},
+		{
+			"key": "userGroupId",
+			"value": ""
+		},
+		{
+			"key": "userGroupPermissionId",
+			"value": ""
+		},
+		{
+			"key": "adUserId",
+			"value": ""
+		},
+		{
+			"key": "adUserPermissionId",
+			"value": ""
+		},
+		{
+			"key": "adGroupId",
+			"value": ""
+		},
+		{
+			"key": "adGroupPermissionId",
+			"value": ""
+		}
+	]
+}

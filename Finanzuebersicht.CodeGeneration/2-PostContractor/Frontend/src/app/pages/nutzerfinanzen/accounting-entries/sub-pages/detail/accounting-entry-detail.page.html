@@ -1,0 +1,305 @@
+<div class="fst-container">
+    <div class="fst-header">
+        <div class="fst-toolbar">
+            <h1>Accounting Entry: {{accountingEntry?.id}}</h1>
+            <button mat-flat-button [routerLink]="['/nutzerfinanzen/accounting-entries']">
+                Schließen
+            </button>
+            <button mat-flat-button color="primary" class="save-button" (click)="onSaveClicked()">
+                <mat-icon class="mat-icon-button-fix">save</mat-icon>
+                Speichern
+            </button>
+            <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
+                <mat-icon class="mat-icon-button-fix">delete</mat-icon>
+                Löschen
+            </button>
+        </div>
+    </div>
+
+    <div class="fst-content loading" *ngIf="!accountingEntry">
+        <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+    </div>
+
+    <div class="fst-content" *ngIf="accountingEntry">
+        <form [formGroup]="formController.formGroup" class="form-layout-container">
+            <div class="form-layout-card">
+
+                    <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="categoryId" >
+                        <mat-label>Category:</mat-label>
+                        <div class="form-layout-inputs">
+                            <search-dropdown [formGroupInstance]="formController.formGroup" [formControlNameInstance]="'categoryId'"
+                            label="Category" idExpr="id" displayExpr="id" [dataSource]="categoryDataSource"></search-dropdown>
+                        </div>
+                        <form-layout-row-status></form-layout-row-status>
+                        <div class="form-layout-side-bar" >
+                            <form-layout-error formControlNameInstance="categoryId" errorType="required"
+                                title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                            </form-layout-error>
+                        </div>
+                    </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="auftragskonto">
+                    <mat-label>Auftragskonto:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="auftragskonto" maxlength="50"
+                                placeholder="Auftragskonto">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="auftragskonto" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="buchungsdatum">
+                    <mat-label>Buchungsdatum:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="buchungsdatum" placeholder ="Buchungsdatum"
+                                [matDatepicker]="pickerBuchungsdatum">
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerBuchungsdatum">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerBuchungsdatum></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="buchungsdatum" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="valutaDatum">
+                    <mat-label>Valuta Datum:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="valutaDatum" placeholder ="Valuta Datum"
+                                [matDatepicker]="pickerValutaDatum">
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerValutaDatum">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerValutaDatum></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="valutaDatum" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="buchungstext">
+                    <mat-label>Buchungstext:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="buchungstext" maxlength="50"
+                                placeholder="Buchungstext">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="buchungstext" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="verwendungszweck">
+                    <mat-label>Verwendungszweck:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="verwendungszweck" maxlength="50"
+                                placeholder="Verwendungszweck">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="verwendungszweck" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="glaeubigerId">
+                    <mat-label>Gläubiger Id:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="glaeubigerId" maxlength="50"
+                                placeholder="Gläubiger Id">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="glaeubigerId" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="mandatsreferenz">
+                    <mat-label>Mandatsreferenz:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="mandatsreferenz" maxlength="50"
+                                placeholder="Mandatsreferenz">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="mandatsreferenz" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="sammlerreferenz">
+                    <mat-label>Sammlerreferenz:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="sammlerreferenz" maxlength="50"
+                                placeholder="Sammlerreferenz">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="sammlerreferenz" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="lastschriftUrsprungsbetrag">
+                    <mat-label>Lastschrift Ursprungsbetrag:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="lastschriftUrsprungsbetrag" maxlength="50"
+                                type="number" placeholder="Lastschrift Ursprungsbetrag">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="lastschriftUrsprungsbetrag" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="auslagenersatzRuecklastschrift">
+                    <mat-label>Auslagenersatz Rücklastschrift:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="auslagenersatzRuecklastschrift" maxlength="50"
+                                placeholder="Auslagenersatz Rücklastschrift">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="auslagenersatzRuecklastschrift" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="beguenstigter">
+                    <mat-label>Begünstigter:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="beguenstigter" maxlength="50"
+                                placeholder="Begünstigter">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="beguenstigter" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="iBAN">
+                    <mat-label>I B A N:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="iBAN" maxlength="50"
+                                placeholder="I B A N">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="iBAN" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="bIC">
+                    <mat-label>B I C:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="bIC" maxlength="50"
+                                placeholder="B I C">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="bIC" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="betrag">
+                    <mat-label>Betrag:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="betrag" maxlength="50"
+                                type="number" placeholder="Betrag">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="betrag" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="waehrung">
+                    <mat-label>Währung:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="waehrung" maxlength="50"
+                                placeholder="Währung">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="waehrung" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="info">
+                    <mat-label>Info:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="info" maxlength="50"
+                                placeholder="Info">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="info" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

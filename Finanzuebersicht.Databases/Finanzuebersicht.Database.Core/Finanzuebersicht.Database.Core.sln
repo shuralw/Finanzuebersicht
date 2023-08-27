@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Persistence.InsertData.Dev", "Core.Persistence.InsertData.Dev\Core.Persistence.InsertData.Dev.csproj", "{0CF63A20-BCA5-4530-B542-124760DD45CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generated.DbContext", "Generated.DbContext\Generated.DbContext.csproj", "{8CABAAA6-DA42-4E13-AD68-A417565D817C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CF63A20-BCA5-4530-B542-124760DD45CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CF63A20-BCA5-4530-B542-124760DD45CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CF63A20-BCA5-4530-B542-124760DD45CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CF63A20-BCA5-4530-B542-124760DD45CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CABAAA6-DA42-4E13-AD68-A417565D817C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CABAAA6-DA42-4E13-AD68-A417565D817C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CABAAA6-DA42-4E13-AD68-A417565D817C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CABAAA6-DA42-4E13-AD68-A417565D817C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47E80BD8-E91A-4312-9E52-1F36B555C27E}
+	EndGlobalSection
+EndGlobal

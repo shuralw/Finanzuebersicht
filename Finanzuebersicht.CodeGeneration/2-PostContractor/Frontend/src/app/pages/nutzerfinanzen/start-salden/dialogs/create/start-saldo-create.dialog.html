@@ -1,0 +1,62 @@
+<div class="fst-container">
+    <div class="fst-header">
+        <div class="fst-toolbar">
+            <h2>Start Saldo erstellen</h2>
+            <button mat-icon-button mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="fst-content">
+        <form [formGroup]="formController.formGroup" class="form-layout-container">
+            <div class="form-layout-card">
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="betrag">
+                    <mat-label>Betrag:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="betrag" maxlength="50"
+                                type="number" placeholder="Betrag">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="betrag" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="amDatum">
+                    <mat-label>Am Datum:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="amDatum" placeholder ="Am Datum"
+                                [matDatepicker]="pickerAmDatum">
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerAmDatum">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerAmDatum></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="amDatum" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-layout-buttons">
+                <button mat-button mat-dialog-close>
+                    Abbrechen
+                </button>
+
+                <button mat-flat-button color="primary" (click)="onCreateClicked()">
+                    <mat-icon class="mat-icon-button-fix">add</mat-icon>
+                    Erstellen
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

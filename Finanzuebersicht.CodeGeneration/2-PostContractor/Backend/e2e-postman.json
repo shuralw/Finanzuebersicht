@@ -1,0 +1,4025 @@
+{
+	"info": {
+		"_postman_id": "3359fb59-b2a6-46d1-880d-651886e30886",
+		"name": "API End-to-End Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Nutzerfinanzen - Categories",
+			"item": [
+				{
+					"name": "Create Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"E2E Title 1\",\n  \"color\": \"E2E Color 1\",\n  \"title\": \"E2E Title 1\",\n  \"color\": \"E2E Color 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"title\": \"E2E Title 1\",\n  \"color\": \"E2E Color 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.title).to.eql(\"E2E Title 1\");\r",
+									"    pm.expect(jsonData.color).to.eql(\"E2E Color 1\");\r",
+									"    pm.expect(jsonData.title).to.eql(\"E2E Title 1\");\r",
+									"    pm.expect(jsonData.color).to.eql(\"E2E Color 1\");\r",
+									"    pm.expect(jsonData.title).to.eql(\"E2E Title 1\");\r",
+									"    pm.expect(jsonData.color).to.eql(\"E2E Color 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"    pm.expect(jsonData.data[0].title).to.eql(\"E2E Title 1\");\r",
+									"    pm.expect(jsonData.data[0].color).to.eql(\"E2E Color 1\");\r",
+									"    pm.expect(jsonData.data[0].title).to.eql(\"E2E Title 1\");\r",
+									"    pm.expect(jsonData.data[0].color).to.eql(\"E2E Color 1\");\r",
+									"    pm.expect(jsonData.data[0].title).to.eql(\"E2E Title 1\");\r",
+									"    pm.expect(jsonData.data[0].color).to.eql(\"E2E Color 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories?filter.id={{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eCategory1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eCategory1Id}}\",\n  \"title\": \"Updated E2E Title 1\",\n  \"color\": \"Updated E2E Color 1\",\n  \"title\": \"Updated E2E Title 1\",\n  \"color\": \"Updated E2E Color 1\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"title\": \"Updated E2E Title 1\",\n  \"color\": \"Updated E2E Color 1\",\n  \"categoryId\": \"{{e2eCategory2Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.title).to.eql(\"Updated E2E Title 1\");\r",
+									"    pm.expect(jsonData.color).to.eql(\"Updated E2E Color 1\");\r",
+									"    pm.expect(jsonData.title).to.eql(\"Updated E2E Title 1\");\r",
+									"    pm.expect(jsonData.color).to.eql(\"Updated E2E Color 1\");\r",
+									"    pm.expect(jsonData.title).to.eql(\"Updated E2E Title 1\");\r",
+									"    pm.expect(jsonData.color).to.eql(\"Updated E2E Color 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"E2E Title 1\",\n  \"color\": \"E2E Color 1\",\n  \"title\": \"E2E Title 1\",\n  \"color\": \"E2E Color 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"title\": \"E2E Title 1\",\n  \"color\": \"E2E Color 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"E2E Title 2\",\n  \"color\": \"E2E Color 2\",\n  \"title\": \"E2E Title 2\",\n  \"color\": \"E2E Color 2\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"title\": \"E2E Title 2\",\n  \"color\": \"E2E Color 2\",\n  \"categoryId\": \"{{e2eCategory2Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - Categories",
+			"item": [
+				{
+					"name": "Create Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories?filter.id={{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eCategory1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eCategory1Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - AccountingEntries",
+			"item": [
+				{
+					"name": "Create AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eAccountingEntry1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"auftragskonto\": \"E2E Auftragskonto 1\",\n  \"buchungsdatum\": \"2019-03-31T00:00:00\",\n  \"valutaDatum\": \"2019-09-10T00:00:00\",\n  \"buchungstext\": \"E2E Buchungstext 1\",\n  \"verwendungszweck\": \"E2E Verwendungszweck 1\",\n  \"glaeubigerId\": \"E2E GlaeubigerId 1\",\n  \"mandatsreferenz\": \"E2E Mandatsreferenz 1\",\n  \"sammlerreferenz\": \"E2E Sammlerreferenz 1\",\n  \"lastschriftUrsprungsbetrag\": 79.62065,\n  \"auslagenersatzRuecklastschrift\": \"E2E AuslagenersatzRuecklastschrift 1\",\n  \"beguenstigter\": \"E2E Beguenstigter 1\",\n  \"iBAN\": \"E2E IBAN 1\",\n  \"bIC\": \"E2E BIC 1\",\n  \"betrag\": 49.44607,\n  \"waehrung\": \"E2E Waeh 1\",\n  \"info\": \"E2E Info 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"auftragskonto\": \"E2E Auftragskonto 1\",\n  \"buchungsdatum\": \"2019-03-31T00:00:00\",\n  \"valutaDatum\": \"2019-09-10T00:00:00\",\n  \"buchungstext\": \"E2E Buchungstext 1\",\n  \"verwendungszweck\": \"E2E Verwendungszweck 1\",\n  \"glaeubigerId\": \"E2E GlaeubigerId 1\",\n  \"mandatsreferenz\": \"E2E Mandatsreferenz 1\",\n  \"sammlerreferenz\": \"E2E Sammlerreferenz 1\",\n  \"lastschriftUrsprungsbetrag\": 79.62065,\n  \"auslagenersatzRuecklastschrift\": \"E2E AuslagenersatzRuecklastschrift 1\",\n  \"beguenstigter\": \"E2E Beguenstigter 1\",\n  \"iBAN\": \"E2E IBAN 1\",\n  \"bIC\": \"E2E BIC 1\",\n  \"betrag\": 49.44607,\n  \"waehrung\": \"E2E Waeh 1\",\n  \"info\": \"E2E Info 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.auftragskonto).to.eql(\"E2E Auftragskonto 1\");\r",
+									"    pm.expect(jsonData.buchungsdatum).to.eql(\"2019-03-31T00:00:00\");\r",
+									"    pm.expect(jsonData.valutaDatum).to.eql(\"2019-09-10T00:00:00\");\r",
+									"    pm.expect(jsonData.buchungstext).to.eql(\"E2E Buchungstext 1\");\r",
+									"    pm.expect(jsonData.verwendungszweck).to.eql(\"E2E Verwendungszweck 1\");\r",
+									"    pm.expect(jsonData.glaeubigerId).to.eql(\"E2E GlaeubigerId 1\");\r",
+									"    pm.expect(jsonData.mandatsreferenz).to.eql(\"E2E Mandatsreferenz 1\");\r",
+									"    pm.expect(jsonData.sammlerreferenz).to.eql(\"E2E Sammlerreferenz 1\");\r",
+									"    pm.expect(jsonData.lastschriftUrsprungsbetrag).to.eql(79.62065);\r",
+									"    pm.expect(jsonData.auslagenersatzRuecklastschrift).to.eql(\"E2E AuslagenersatzRuecklastschrift 1\");\r",
+									"    pm.expect(jsonData.beguenstigter).to.eql(\"E2E Beguenstigter 1\");\r",
+									"    pm.expect(jsonData.iBAN).to.eql(\"E2E IBAN 1\");\r",
+									"    pm.expect(jsonData.bIC).to.eql(\"E2E BIC 1\");\r",
+									"    pm.expect(jsonData.betrag).to.eql(49.44607);\r",
+									"    pm.expect(jsonData.waehrung).to.eql(\"E2E Waeh 1\");\r",
+									"    pm.expect(jsonData.info).to.eql(\"E2E Info 1\");\r",
+									"    pm.expect(jsonData.auftragskonto).to.eql(\"E2E Auftragskonto 1\");\r",
+									"    pm.expect(jsonData.buchungsdatum).to.eql(\"2019-03-31T00:00:00\");\r",
+									"    pm.expect(jsonData.valutaDatum).to.eql(\"2019-09-10T00:00:00\");\r",
+									"    pm.expect(jsonData.buchungstext).to.eql(\"E2E Buchungstext 1\");\r",
+									"    pm.expect(jsonData.verwendungszweck).to.eql(\"E2E Verwendungszweck 1\");\r",
+									"    pm.expect(jsonData.glaeubigerId).to.eql(\"E2E GlaeubigerId 1\");\r",
+									"    pm.expect(jsonData.mandatsreferenz).to.eql(\"E2E Mandatsreferenz 1\");\r",
+									"    pm.expect(jsonData.sammlerreferenz).to.eql(\"E2E Sammlerreferenz 1\");\r",
+									"    pm.expect(jsonData.lastschriftUrsprungsbetrag).to.eql(79.62065);\r",
+									"    pm.expect(jsonData.auslagenersatzRuecklastschrift).to.eql(\"E2E AuslagenersatzRuecklastschrift 1\");\r",
+									"    pm.expect(jsonData.beguenstigter).to.eql(\"E2E Beguenstigter 1\");\r",
+									"    pm.expect(jsonData.iBAN).to.eql(\"E2E IBAN 1\");\r",
+									"    pm.expect(jsonData.bIC).to.eql(\"E2E BIC 1\");\r",
+									"    pm.expect(jsonData.betrag).to.eql(49.44607);\r",
+									"    pm.expect(jsonData.waehrung).to.eql(\"E2E Waeh 1\");\r",
+									"    pm.expect(jsonData.info).to.eql(\"E2E Info 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"    pm.expect(jsonData.data[0].auftragskonto).to.eql(\"E2E Auftragskonto 1\");\r",
+									"    pm.expect(jsonData.data[0].buchungsdatum).to.eql(\"2019-03-31T00:00:00\");\r",
+									"    pm.expect(jsonData.data[0].valutaDatum).to.eql(\"2019-09-10T00:00:00\");\r",
+									"    pm.expect(jsonData.data[0].buchungstext).to.eql(\"E2E Buchungstext 1\");\r",
+									"    pm.expect(jsonData.data[0].verwendungszweck).to.eql(\"E2E Verwendungszweck 1\");\r",
+									"    pm.expect(jsonData.data[0].glaeubigerId).to.eql(\"E2E GlaeubigerId 1\");\r",
+									"    pm.expect(jsonData.data[0].mandatsreferenz).to.eql(\"E2E Mandatsreferenz 1\");\r",
+									"    pm.expect(jsonData.data[0].sammlerreferenz).to.eql(\"E2E Sammlerreferenz 1\");\r",
+									"    pm.expect(jsonData.data[0].lastschriftUrsprungsbetrag).to.eql(79.62065);\r",
+									"    pm.expect(jsonData.data[0].auslagenersatzRuecklastschrift).to.eql(\"E2E AuslagenersatzRuecklastschrift 1\");\r",
+									"    pm.expect(jsonData.data[0].beguenstigter).to.eql(\"E2E Beguenstigter 1\");\r",
+									"    pm.expect(jsonData.data[0].iBAN).to.eql(\"E2E IBAN 1\");\r",
+									"    pm.expect(jsonData.data[0].bIC).to.eql(\"E2E BIC 1\");\r",
+									"    pm.expect(jsonData.data[0].betrag).to.eql(49.44607);\r",
+									"    pm.expect(jsonData.data[0].waehrung).to.eql(\"E2E Waeh 1\");\r",
+									"    pm.expect(jsonData.data[0].info).to.eql(\"E2E Info 1\");\r",
+									"    pm.expect(jsonData.data[0].auftragskonto).to.eql(\"E2E Auftragskonto 1\");\r",
+									"    pm.expect(jsonData.data[0].buchungsdatum).to.eql(\"2019-03-31T00:00:00\");\r",
+									"    pm.expect(jsonData.data[0].valutaDatum).to.eql(\"2019-09-10T00:00:00\");\r",
+									"    pm.expect(jsonData.data[0].buchungstext).to.eql(\"E2E Buchungstext 1\");\r",
+									"    pm.expect(jsonData.data[0].verwendungszweck).to.eql(\"E2E Verwendungszweck 1\");\r",
+									"    pm.expect(jsonData.data[0].glaeubigerId).to.eql(\"E2E GlaeubigerId 1\");\r",
+									"    pm.expect(jsonData.data[0].mandatsreferenz).to.eql(\"E2E Mandatsreferenz 1\");\r",
+									"    pm.expect(jsonData.data[0].sammlerreferenz).to.eql(\"E2E Sammlerreferenz 1\");\r",
+									"    pm.expect(jsonData.data[0].lastschriftUrsprungsbetrag).to.eql(79.62065);\r",
+									"    pm.expect(jsonData.data[0].auslagenersatzRuecklastschrift).to.eql(\"E2E AuslagenersatzRuecklastschrift 1\");\r",
+									"    pm.expect(jsonData.data[0].beguenstigter).to.eql(\"E2E Beguenstigter 1\");\r",
+									"    pm.expect(jsonData.data[0].iBAN).to.eql(\"E2E IBAN 1\");\r",
+									"    pm.expect(jsonData.data[0].bIC).to.eql(\"E2E BIC 1\");\r",
+									"    pm.expect(jsonData.data[0].betrag).to.eql(49.44607);\r",
+									"    pm.expect(jsonData.data[0].waehrung).to.eql(\"E2E Waeh 1\");\r",
+									"    pm.expect(jsonData.data[0].info).to.eql(\"E2E Info 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries?filter.id={{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eAccountingEntry1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eAccountingEntry1Id}}\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"auftragskonto\": \"Updated E2E Auftragskonto 1\",\n  \"buchungsdatum\": \"2019-06-06T00:00:00\",\n  \"valutaDatum\": \"2013-05-30T00:00:00\",\n  \"buchungstext\": \"Updated E2E Buchungstext 1\",\n  \"verwendungszweck\": \"Updated E2E Verwendungszweck 1\",\n  \"glaeubigerId\": \"Updated E2E GlaeubigerId 1\",\n  \"mandatsreferenz\": \"Updated E2E Mandatsreferenz 1\",\n  \"sammlerreferenz\": \"Updated E2E Sammlerreferenz 1\",\n  \"lastschriftUrsprungsbetrag\": 85.89354,\n  \"auslagenersatzRuecklastschrift\": \"Updated E2E AuslagenersatzRuecklastschrift 1\",\n  \"beguenstigter\": \"Updated E2E Beguenstigter 1\",\n  \"iBAN\": \"Updated E2E IBAN 1\",\n  \"bIC\": \"Updated E2E BIC 1\",\n  \"betrag\": 67.45702,\n  \"waehrung\": \"Updated E2E  1\",\n  \"info\": \"Updated E2E Info 1\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"auftragskonto\": \"Updated E2E Auftragskonto 1\",\n  \"buchungsdatum\": \"2019-06-06T00:00:00\",\n  \"valutaDatum\": \"2013-05-30T00:00:00\",\n  \"buchungstext\": \"Updated E2E Buchungstext 1\",\n  \"verwendungszweck\": \"Updated E2E Verwendungszweck 1\",\n  \"glaeubigerId\": \"Updated E2E GlaeubigerId 1\",\n  \"mandatsreferenz\": \"Updated E2E Mandatsreferenz 1\",\n  \"sammlerreferenz\": \"Updated E2E Sammlerreferenz 1\",\n  \"lastschriftUrsprungsbetrag\": 85.89354,\n  \"auslagenersatzRuecklastschrift\": \"Updated E2E AuslagenersatzRuecklastschrift 1\",\n  \"beguenstigter\": \"Updated E2E Beguenstigter 1\",\n  \"iBAN\": \"Updated E2E IBAN 1\",\n  \"bIC\": \"Updated E2E BIC 1\",\n  \"betrag\": 67.45702,\n  \"waehrung\": \"Updated E2E  1\",\n  \"info\": \"Updated E2E Info 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.auftragskonto).to.eql(\"Updated E2E Auftragskonto 1\");\r",
+									"    pm.expect(jsonData.buchungsdatum).to.eql(\"2019-06-06T00:00:00\");\r",
+									"    pm.expect(jsonData.valutaDatum).to.eql(\"2013-05-30T00:00:00\");\r",
+									"    pm.expect(jsonData.buchungstext).to.eql(\"Updated E2E Buchungstext 1\");\r",
+									"    pm.expect(jsonData.verwendungszweck).to.eql(\"Updated E2E Verwendungszweck 1\");\r",
+									"    pm.expect(jsonData.glaeubigerId).to.eql(\"Updated E2E GlaeubigerId 1\");\r",
+									"    pm.expect(jsonData.mandatsreferenz).to.eql(\"Updated E2E Mandatsreferenz 1\");\r",
+									"    pm.expect(jsonData.sammlerreferenz).to.eql(\"Updated E2E Sammlerreferenz 1\");\r",
+									"    pm.expect(jsonData.lastschriftUrsprungsbetrag).to.eql(85.89354);\r",
+									"    pm.expect(jsonData.auslagenersatzRuecklastschrift).to.eql(\"Updated E2E AuslagenersatzRuecklastschrift 1\");\r",
+									"    pm.expect(jsonData.beguenstigter).to.eql(\"Updated E2E Beguenstigter 1\");\r",
+									"    pm.expect(jsonData.iBAN).to.eql(\"Updated E2E IBAN 1\");\r",
+									"    pm.expect(jsonData.bIC).to.eql(\"Updated E2E BIC 1\");\r",
+									"    pm.expect(jsonData.betrag).to.eql(67.45702);\r",
+									"    pm.expect(jsonData.waehrung).to.eql(\"Updated E2E  1\");\r",
+									"    pm.expect(jsonData.info).to.eql(\"Updated E2E Info 1\");\r",
+									"    pm.expect(jsonData.auftragskonto).to.eql(\"Updated E2E Auftragskonto 1\");\r",
+									"    pm.expect(jsonData.buchungsdatum).to.eql(\"2019-06-06T00:00:00\");\r",
+									"    pm.expect(jsonData.valutaDatum).to.eql(\"2013-05-30T00:00:00\");\r",
+									"    pm.expect(jsonData.buchungstext).to.eql(\"Updated E2E Buchungstext 1\");\r",
+									"    pm.expect(jsonData.verwendungszweck).to.eql(\"Updated E2E Verwendungszweck 1\");\r",
+									"    pm.expect(jsonData.glaeubigerId).to.eql(\"Updated E2E GlaeubigerId 1\");\r",
+									"    pm.expect(jsonData.mandatsreferenz).to.eql(\"Updated E2E Mandatsreferenz 1\");\r",
+									"    pm.expect(jsonData.sammlerreferenz).to.eql(\"Updated E2E Sammlerreferenz 1\");\r",
+									"    pm.expect(jsonData.lastschriftUrsprungsbetrag).to.eql(85.89354);\r",
+									"    pm.expect(jsonData.auslagenersatzRuecklastschrift).to.eql(\"Updated E2E AuslagenersatzRuecklastschrift 1\");\r",
+									"    pm.expect(jsonData.beguenstigter).to.eql(\"Updated E2E Beguenstigter 1\");\r",
+									"    pm.expect(jsonData.iBAN).to.eql(\"Updated E2E IBAN 1\");\r",
+									"    pm.expect(jsonData.bIC).to.eql(\"Updated E2E BIC 1\");\r",
+									"    pm.expect(jsonData.betrag).to.eql(67.45702);\r",
+									"    pm.expect(jsonData.waehrung).to.eql(\"Updated E2E  1\");\r",
+									"    pm.expect(jsonData.info).to.eql(\"Updated E2E Info 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntry 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create AccountingEntry 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eAccountingEntry1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"auftragskonto\": \"E2E Auftragskonto 1\",\n  \"buchungsdatum\": \"2019-03-31T00:00:00\",\n  \"valutaDatum\": \"2019-09-10T00:00:00\",\n  \"buchungstext\": \"E2E Buchungstext 1\",\n  \"verwendungszweck\": \"E2E Verwendungszweck 1\",\n  \"glaeubigerId\": \"E2E GlaeubigerId 1\",\n  \"mandatsreferenz\": \"E2E Mandatsreferenz 1\",\n  \"sammlerreferenz\": \"E2E Sammlerreferenz 1\",\n  \"lastschriftUrsprungsbetrag\": 79.62065,\n  \"auslagenersatzRuecklastschrift\": \"E2E AuslagenersatzRuecklastschrift 1\",\n  \"beguenstigter\": \"E2E Beguenstigter 1\",\n  \"iBAN\": \"E2E IBAN 1\",\n  \"bIC\": \"E2E BIC 1\",\n  \"betrag\": 49.44607,\n  \"waehrung\": \"E2E Waeh 1\",\n  \"info\": \"E2E Info 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"auftragskonto\": \"E2E Auftragskonto 1\",\n  \"buchungsdatum\": \"2019-03-31T00:00:00\",\n  \"valutaDatum\": \"2019-09-10T00:00:00\",\n  \"buchungstext\": \"E2E Buchungstext 1\",\n  \"verwendungszweck\": \"E2E Verwendungszweck 1\",\n  \"glaeubigerId\": \"E2E GlaeubigerId 1\",\n  \"mandatsreferenz\": \"E2E Mandatsreferenz 1\",\n  \"sammlerreferenz\": \"E2E Sammlerreferenz 1\",\n  \"lastschriftUrsprungsbetrag\": 79.62065,\n  \"auslagenersatzRuecklastschrift\": \"E2E AuslagenersatzRuecklastschrift 1\",\n  \"beguenstigter\": \"E2E Beguenstigter 1\",\n  \"iBAN\": \"E2E IBAN 1\",\n  \"bIC\": \"E2E BIC 1\",\n  \"betrag\": 49.44607,\n  \"waehrung\": \"E2E Waeh 1\",\n  \"info\": \"E2E Info 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create AccountingEntry 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eAccountingEntry2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"auftragskonto\": \"E2E Auftragskonto 2\",\n  \"buchungsdatum\": \"2015-03-02T00:00:00\",\n  \"valutaDatum\": \"2011-01-13T00:00:00\",\n  \"buchungstext\": \"E2E Buchungstext 2\",\n  \"verwendungszweck\": \"E2E Verwendungszweck 2\",\n  \"glaeubigerId\": null,\n  \"mandatsreferenz\": null,\n  \"sammlerreferenz\": null,\n  \"lastschriftUrsprungsbetrag\": null,\n  \"auslagenersatzRuecklastschrift\": null,\n  \"beguenstigter\": \"E2E Beguenstigter 2\",\n  \"iBAN\": \"E2E IBAN 2\",\n  \"bIC\": \"E2E BIC 2\",\n  \"betrag\": 73.13394,\n  \"waehrung\": \"E2E Waeh 2\",\n  \"info\": \"E2E Info 2\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"auftragskonto\": \"E2E Auftragskonto 2\",\n  \"buchungsdatum\": \"2015-03-02T00:00:00\",\n  \"valutaDatum\": \"2011-01-13T00:00:00\",\n  \"buchungstext\": \"E2E Buchungstext 2\",\n  \"verwendungszweck\": \"E2E Verwendungszweck 2\",\n  \"glaeubigerId\": null,\n  \"mandatsreferenz\": null,\n  \"sammlerreferenz\": null,\n  \"lastschriftUrsprungsbetrag\": null,\n  \"auslagenersatzRuecklastschrift\": null,\n  \"beguenstigter\": \"E2E Beguenstigter 2\",\n  \"iBAN\": \"E2E IBAN 2\",\n  \"bIC\": \"E2E BIC 2\",\n  \"betrag\": 73.13394,\n  \"waehrung\": \"E2E Waeh 2\",\n  \"info\": \"E2E Info 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - CategorySearchTerms",
+			"item": [
+				{
+					"name": "Create CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategorySearchTerm1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"term\": \"E2E Term 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"term\": \"E2E Term 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.term).to.eql(\"E2E Term 1\");\r",
+									"    pm.expect(jsonData.term).to.eql(\"E2E Term 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerms",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"    pm.expect(jsonData.data[0].term).to.eql(\"E2E Term 1\");\r",
+									"    pm.expect(jsonData.data[0].term).to.eql(\"E2E Term 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms?filter.id={{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eCategorySearchTerm1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eCategorySearchTerm1Id}}\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"term\": \"Updated E2E Term 1\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"term\": \"Updated E2E Term 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.term).to.eql(\"Updated E2E Term 1\");\r",
+									"    pm.expect(jsonData.term).to.eql(\"Updated E2E Term 1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerm 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CategorySearchTerm 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategorySearchTerm1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"term\": \"E2E Term 1\",\n  \"categoryId\": \"{{e2eCategory1Id}}\",\n  \"term\": \"E2E Term 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CategorySearchTerm 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategorySearchTerm2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"term\": \"E2E Term 2\",\n  \"categoryId\": \"{{e2eCategory2Id}}\",\n  \"term\": \"E2E Term 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - StartSalden",
+			"item": [
+				{
+					"name": "Create StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eStartSaldo1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"betrag\": 90.8593,\n  \"amDatum\": \"2011-10-25T00:00:00\",\n  \"betrag\": 90.8593,\n  \"amDatum\": \"2011-10-25T00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.betrag).to.eql(90.8593);\r",
+									"    pm.expect(jsonData.amDatum).to.eql(\"2011-10-25T00:00:00\");\r",
+									"    pm.expect(jsonData.betrag).to.eql(90.8593);\r",
+									"    pm.expect(jsonData.amDatum).to.eql(\"2011-10-25T00:00:00\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSalden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"    pm.expect(jsonData.data[0].betrag).to.eql(90.8593);\r",
+									"    pm.expect(jsonData.data[0].amDatum).to.eql(\"2011-10-25T00:00:00\");\r",
+									"    pm.expect(jsonData.data[0].betrag).to.eql(90.8593);\r",
+									"    pm.expect(jsonData.data[0].amDatum).to.eql(\"2011-10-25T00:00:00\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden?filter.id={{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eStartSaldo1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eStartSaldo1Id}}\",\n  \"betrag\": 37.38117,\n  \"amDatum\": \"2011-09-14T00:00:00\",\n  \"betrag\": 37.38117,\n  \"amDatum\": \"2011-09-14T00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.betrag).to.eql(37.38117);\r",
+									"    pm.expect(jsonData.amDatum).to.eql(\"2011-09-14T00:00:00\");\r",
+									"    pm.expect(jsonData.betrag).to.eql(37.38117);\r",
+									"    pm.expect(jsonData.amDatum).to.eql(\"2011-09-14T00:00:00\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSaldo 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create StartSaldo 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eStartSaldo1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"betrag\": 90.8593,\n  \"amDatum\": \"2011-10-25T00:00:00\",\n  \"betrag\": 90.8593,\n  \"amDatum\": \"2011-10-25T00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create StartSaldo 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eStartSaldo2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"betrag\": 34.40995,\n  \"amDatum\": \"2017-06-03T00:00:00\",\n  \"betrag\": 34.40995,\n  \"amDatum\": \"2017-06-03T00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - Categories",
+			"item": [
+				{
+					"name": "Create Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories?filter.id={{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eCategory1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eCategory1Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories/{{e2eCategory1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories",
+								"{{e2eCategory1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategory2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - AccountingEntries",
+			"item": [
+				{
+					"name": "Create AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eAccountingEntry1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries?filter.id={{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eAccountingEntry1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eAccountingEntry1Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete AccountingEntry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccountingEntry 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries/{{e2eAccountingEntry1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries",
+								"{{e2eAccountingEntry1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create AccountingEntry 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eAccountingEntry1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create AccountingEntry 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eAccountingEntry2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/accounting-entries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"accounting-entries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - CategorySearchTerms",
+			"item": [
+				{
+					"name": "Create CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategorySearchTerm1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerms",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms?filter.id={{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eCategorySearchTerm1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eCategorySearchTerm1Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete CategorySearchTerm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CategorySearchTerm 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms/{{e2eCategorySearchTerm1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms",
+								"{{e2eCategorySearchTerm1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CategorySearchTerm 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategorySearchTerm1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CategorySearchTerm 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eCategorySearchTerm2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/category-search-terms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"category-search-terms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutzerfinanzen - StartSalden",
+			"item": [
+				{
+					"name": "Create StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eStartSaldo1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSalden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.count).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden?filter.id={{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							],
+							"query": [
+								{
+									"key": "filter.id",
+									"value": "{{e2eStartSaldo1Id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{e2eStartSaldo1Id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON Data complete\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete StartSaldo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StartSaldo 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden/{{e2eStartSaldo1Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden",
+								"{{e2eStartSaldo1Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create StartSaldo 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eStartSaldo1Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create StartSaldo 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result-Guid not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).is.not.eql(0);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"e2eStartSaldo2Id\", jsonData.data);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nutzerfinanzen/start-salden",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nutzerfinanzen",
+								"start-salden"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "default"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "mandantId",
+			"value": ""
+		},
+		{
+			"key": "emailUserId",
+			"value": ""
+		},
+		{
+			"key": "emailUserPermissionId",
+			"value": ""
+		},
+		{
+			"key": "userGroupId",
+			"value": ""
+		},
+		{
+			"key": "userGroupPermissionId",
+			"value": ""
+		},
+		{
+			"key": "adUserId",
+			"value": ""
+		},
+		{
+			"key": "adUserPermissionId",
+			"value": ""
+		},
+		{
+			"key": "adGroupId",
+			"value": ""
+		},
+		{
+			"key": "adGroupPermissionId",
+			"value": ""
+		}
+	]
+}

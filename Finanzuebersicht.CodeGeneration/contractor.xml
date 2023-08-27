@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Contractor minContractorVersion="2.6.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jonashammerschmidt/Contractor/2.5.0/Contractor.XML/XSD/contractor.xsd">
+    <Paths>
+        <BackendDestinationFolder>2-PostContractor\Backend</BackendDestinationFolder>
+        <BackendGeneratedDestinationFolder>2-PostContractor\Backend.Generated</BackendGeneratedDestinationFolder>
+        <DbDestinationFolder>2-PostContractor\Database</DbDestinationFolder>
+        <FrontendDestinationFolder>2-PostContractor\Frontend</FrontendDestinationFolder>
+        <ProjectName>Finanzuebersicht.Backend.CodeGeneration</ProjectName>
+        <GeneratedProjectName>Finanzuebersicht.Backend.Generated</GeneratedProjectName>
+        <DbProjectName>Finanzuebersicht.Database.Core</DbProjectName>
+        <DbContextName>FinanzuebersichtDbContext</DbContextName>
+    </Paths>
+    <Replacements>
+        <Replacement pattern="app-search-dropdown" replaceWith="search-dropdown" />
+        <Replacement pattern="app-table-filter-bar" replaceWith="table-filter-bar" />
+        <Replacement
+            pattern="src/app/components/ui/dropdown-data-source/dropdown-pagination-data-source"
+            replaceWith="@krz/material" />
+        <Replacement pattern="src/app/components/ui/search-dropdown/search-dropdown.module"
+            replaceWith="@krz/material" />
+        <Replacement pattern="src/app/components/ui/table-filter-bar/table-filter-bar.module"
+            replaceWith="@krz/material" />
+        <Replacement pattern="src/app/components/ui/file-picker/file-picker.module"
+            replaceWith="@krz/material" />
+        <Replacement pattern="src/app/services/backend/pagination/i-paged-result"
+            replaceWith="@krz/material" />
+        <Replacement pattern="src/app/services/backend/pagination/i-pagination-options"
+            replaceWith="@krz/material" />
+        <Replacement pattern="src/app/services/backend/pagination/pagination.data-source"
+            replaceWith="@krz/material" />
+        <Replacement pattern="Contract.Architecture.Backend.Common"
+            replaceWith="Krz.FullstackTemplate.Backend.Common" />
+        <Replacement pattern="CodeGeneration.Generated" replaceWith="Generated" />
+    </Replacements>
+    <Includes></Includes>
+    <Modules>
+        <Module name="Nutzerfinanzen">
+            <Entity name="AccountingEntry" namePlural="AccountingEntries">
+                <Relation1ToN entityNameFrom="Category" />
+                <Property name="Auftragskonto" type="String:30" />
+                <Property name="Buchungsdatum" type="DateTime" />
+                <Property name="ValutaDatum" type="DateTime" />
+                <Property name="Buchungstext" type="String:300" />
+                <Property name="Verwendungszweck" type="String:4000" />
+                <Property name="GlaeubigerId" type="String:100" optional="true" />
+                <Property name="Mandatsreferenz" type="String:100" optional="true" />
+                <Property name="Sammlerreferenz" type="String:100" optional="true" />
+                <Property name="LastschriftUrsprungsbetrag" type="Double" optional="true" />
+                <Property name="AuslagenersatzRuecklastschrift" type="String:1000" optional="true" />
+                <Property name="Beguenstigter" type="String:2000" />
+                <Property name="IBAN" type="String:50" />
+                <Property name="BIC" type="String:50" />
+                <Property name="Betrag" type="Double" />
+                <Property name="Waehrung" type="String:10" />
+                <Property name="Info" type="String:4000" />
+            </Entity>
+            <Entity name="Category" namePlural="Categories">
+                <Property name="Title" type="String:200" />
+                <Property name="Color" type="String:30" />
+                <Relation1ToN entityNameFrom="Category" />
+            </Entity>
+            <Entity name="CategorySearchTerm" namePlural="CategorySearchTerms">
+                <Relation1ToN entityNameFrom="Category" />
+                <Property name="Term" type="String:100" />
+            </Entity>
+            <Entity name="StartSaldo" namePlural="StartSalden">
+                <Property name="Betrag" type="Double" />
+                <Property name="AmDatum" type="DateTime" />
+            </Entity>
+        </Module>
+    </Modules>
+</Contractor>

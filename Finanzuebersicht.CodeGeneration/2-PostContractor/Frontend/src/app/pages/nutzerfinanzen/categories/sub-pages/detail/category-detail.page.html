@@ -1,0 +1,75 @@
+<div class="fst-container">
+    <div class="fst-header">
+        <div class="fst-toolbar">
+            <h1>Category: {{category?.id}}</h1>
+            <button mat-flat-button [routerLink]="['/nutzerfinanzen/categories']">
+                Schließen
+            </button>
+            <button mat-flat-button color="primary" class="save-button" (click)="onSaveClicked()">
+                <mat-icon class="mat-icon-button-fix">save</mat-icon>
+                Speichern
+            </button>
+            <button mat-flat-button color="warn" class="save-button" (click)="onDeleteClicked()">
+                <mat-icon class="mat-icon-button-fix">delete</mat-icon>
+                Löschen
+            </button>
+        </div>
+    </div>
+
+    <div class="fst-content loading" *ngIf="!category">
+        <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+    </div>
+
+    <div class="fst-content" *ngIf="category">
+        <form [formGroup]="formController.formGroup" class="form-layout-container">
+            <div class="form-layout-card">
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="title">
+                    <mat-label>Title:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="title" maxlength="50"
+                                placeholder="Title">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="title" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="color">
+                    <mat-label>Color:</mat-label>
+                    <div class="form-layout-inputs">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input matInput formControlName="color" maxlength="50"
+                                placeholder="Color">
+                        </mat-form-field>
+                    </div>
+                    <form-layout-row-status></form-layout-row-status>
+                    <div class="form-layout-side-bar">
+                        <form-layout-error formControlNameInstance="color" errorType="required"
+                            title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                        </form-layout-error>
+                    </div>
+                </div>
+
+                    <div formLayoutRow [formGroupInstance]="formController.formGroup" formControlNameInstance="categoryId" >
+                        <mat-label>Category:</mat-label>
+                        <div class="form-layout-inputs">
+                            <search-dropdown [formGroupInstance]="formController.formGroup" [formControlNameInstance]="'categoryId'"
+                            label="Category" idExpr="id" displayExpr="id" [dataSource]="categoryDataSource"></search-dropdown>
+                        </div>
+                        <form-layout-row-status></form-layout-row-status>
+                        <div class="form-layout-side-bar" >
+                            <form-layout-error formControlNameInstance="categoryId" errorType="required"
+                                title="Eingabe fehlt" description="Dieses Feld ist erforderlich.">
+                            </form-layout-error>
+                        </div>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>
