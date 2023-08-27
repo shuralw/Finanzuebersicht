@@ -29,6 +29,7 @@ namespace Finanzuebersicht.API.Modules.OAuth.Google
                 return BadRequest();
             }
 
+            var x = User;
             return Ok();
         }
     }
